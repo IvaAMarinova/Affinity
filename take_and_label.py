@@ -21,15 +21,26 @@ for label in labels:
     if not os.path.exists(path):
         os.makedirs(path)
 
+for label in labels:
+    cap = cv2.VideoCapture(0)
+    print('Collecting images for {}\n'.format(label))
+    time.sleep(5)
+    for imgnum in range(number_imgs):
+        print('Collecting image {}\n'.format(imgnum))
+        ret, frame = cap.read()
+        imgname = os.path.join(IMAGES_PATH,label,label+'.'+'{}.jpg'.format(str(uuid.uuid1())))
+        cv2.imwrite(imgname, frame)
+        cv2.imshow('frame', frame)
+        time.sleep(2)
 
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+cap.release()
+cv2.destroyAllWindows()
 
 
 LABELIMG_PATH = os.path.join('Tensorflow', 'labelimg')
 
 if not os.path.exists(LABELIMG_PATH):
     os.makedirs(LABELIMG_PATH)
-
-#if os.name == 'posix': #mi ako nqmash windows, za momenta tupo za teb
-    #!make qt5py3
-if os.name =='nt':
-    !cd {LABELIMG_PATH} && pyrcc5 -o libs/resources.py resources.qrc
+#additional set up here in drive doc

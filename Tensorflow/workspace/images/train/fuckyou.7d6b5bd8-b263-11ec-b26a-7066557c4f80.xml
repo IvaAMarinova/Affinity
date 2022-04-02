@@ -1,0 +1,26 @@
+<annotation>
+	<folder>fuckyou</folder>
+	<filename>fuckyou.7d6b5bd8-b263-11ec-b26a-7066557c4f80.jpg</filename>
+	<path>D:\GitHub\Affinity\Tensorflow\workspace\images\collectedimages\fuckyou\fuckyou.7d6b5bd8-b263-11ec-b26a-7066557c4f80.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>640</width>
+		<height>480</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>FuckYou</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>210</xmin>
+			<ymin>150</ymin>
+			<xmax>433</xmax>
+			<ymax>473</ymax>
+		</bndbox>
+	</object>
+</annotation>

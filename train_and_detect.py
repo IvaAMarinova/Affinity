@@ -1,5 +1,7 @@
 import os
 import wget
+import object_detection
+import matplotlib
 
 CUSTOM_MODEL_NAME = 'my_ssd_mobnet' 
 PRETRAINED_MODEL_NAME = 'ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8'
@@ -36,4 +38,6 @@ for path in paths.values():
                  os.makedirs(path)
 
 os.environ['PATH'] += os.pathsep + os.path.abspath(os.path.join(paths['PROTOC_PATH'], 'bin'))
+
+
 

@@ -1,5 +1,7 @@
-affinity_env
+affinity_env/
 
-remembered_data
+.remembered_data
 
-models
+models/
+
+workspace/

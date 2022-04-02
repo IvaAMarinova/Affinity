@@ -34,3 +34,6 @@ for path in paths.values():
                 os.makedirs(path)
             elif os.name == 'nt':
                  os.makedirs(path)
+
+os.environ['PATH'] += os.pathsep + os.path.abspath(os.path.join(paths['PROTOC_PATH'], 'bin'))
+

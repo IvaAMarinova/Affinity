@@ -2,6 +2,6 @@ affinity_env/
 
 .remembered_data
 
-models/
+Tensorflow/
 
-workspace/
+

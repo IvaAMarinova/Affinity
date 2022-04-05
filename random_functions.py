@@ -72,10 +72,12 @@ def take_ommand_CMD():
 def take_command_mic():
     r = sr.Recognizer()
     with sr.Microphone() as source:
+        speak("Listening...")
         print("Listening...")
         r.pause_threshold = 1
         audio = r.listen(source)
     try: 
+        speak("Recognizing...")
         print("Recognizing...")
         query = r.recognize_google(audio, language='en')
         print(query)
@@ -150,13 +152,21 @@ if __name__ == "__main__":
             kit.playonyt("7 Rings song")
             print("Playing...")
 
+<<<<<<< Updated upstream
         elif 'news' in query:
+=======
+        elif 'news' in query: 
+>>>>>>> Stashed changes
             news()
 
         elif 'read' in query:
             text_to_speech()
 
+<<<<<<< Updated upstream
         elif 'open code' in query:
+=======
+        elif 'open editor' in query:
+>>>>>>> Stashed changes
             codepath = 'C:\\Users\\ivama\\.vscode'
             os.startfile(codepath)
 
@@ -172,9 +182,24 @@ if __name__ == "__main__":
         elif 'offline' in query:
             quit()
 
+<<<<<<< Updated upstream
         else:
             speak("Can you repeat that?")
             print("Can you repeat that?")
+=======
+        elif 'introduction' in query:
+            introduction()
+
+        elif 'legends' in query: 
+            speak('Not gonna happen')
+            print('Not gonna happen')
+
+        else:
+            speak("Sorry, I could not hear you.")
+            print("Sorry, I could not hear you.")
+
+       
+>>>>>>> Stashed changes
         
         """elif 'remember':
             speak("What should i remember?")

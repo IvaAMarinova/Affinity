@@ -14,7 +14,7 @@ import time as tt
 #import spotipy
 import json
 #import requests
-#import wolframalpha 
+#import wolframalpha  
 
 engine = pyttsx3.init()
 
@@ -29,8 +29,6 @@ def get_voices(voice):
     if voice == 1:
         engine.setProperty('voice', voices[1].id)
         
-
-
 def time():
     Time = datetime.datetime.now().strftime('%I:%M:%S')
     speak("The current time is:")

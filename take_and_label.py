@@ -21,7 +21,7 @@ for label in labels:
     if not os.path.exists(path):
         os.makedirs(path)
 
-for label in labels:
+'''for label in labels:
     cap = cv2.VideoCapture(0)
     print('Collecting images for {}\n'.format(label))
     time.sleep(5)
@@ -36,11 +36,11 @@ for label in labels:
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 cap.release()
-cv2.destroyAllWindows()
+cv2.destroyAllWindows()'''
 
 
 LABELIMG_PATH = os.path.join('Tensorflow', 'labelimg')
-
+print(LABELIMG_PATH)
 if not os.path.exists(LABELIMG_PATH):
     os.makedirs(LABELIMG_PATH)
 #additional set up here in drive doc

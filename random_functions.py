@@ -1,7 +1,7 @@
 import pyttsx3  
 import speech_recognition as sr
 import datetime
-#import smtplib
+import smtplib
 import wikipedia
 import webbrowser as wb
 import pywhatkit  as kit
@@ -34,6 +34,18 @@ def time():
     speak("The current time is:")
     speak(Time)
 
+def introduction():
+    speak("What am i? A great question!")
+    print("What am i? A great question!")
+    speak("I am a one of a kind personal assistant!")
+    print("I am a one of a kind personal assistant!")
+    speak("My job is to help you live your life as easy as possible, ")
+    print("My job is to help you live your life as easy as possible, ")
+    speak("while bringing in a grain of humor")
+    print("while bringing in a grain of humor")
+    speak("go piss girl")
+    print("go piss girl")
+
 
 def date():
     year = int(datetime.datetime.now().year)
@@ -43,7 +55,6 @@ def date():
     speak(day)
     speak(month)
     speak(year)
-
 
 def greeting():
     hour = datetime.datetime.now().hour
@@ -56,13 +67,11 @@ def greeting():
     else: 
         speak("Good night!")
 
-
 def wish_me():
     greeting()
     time()
     date()
-    speak("Maeve at your service. Is there something i can help you with?")
-
+    speak("Affinity at your service. Is there something i can help you with?")
 
 def take_ommand_CMD():
     query = input("Is there something i can help you with?\n")
@@ -122,8 +131,8 @@ def text_to_speech():
 
 if __name__ == "__main__":
     get_voices(1)
-    #wish_me()
-    greeting()
+    wish_me()
+    #greeting()
     
     while True:
         query = take_command_mic().lower()
@@ -139,7 +148,7 @@ if __name__ == "__main__":
             query = query.replace("wikipedia", "")
             result = wikipedia.summary(query, sentences = 2)
             print(result)
-            speak(result)
+            #speak("suzdadeno prez 1988 г., то има за цел да подготвя средни специалисти в областта на историята и философията. Първоначално директор е Златка Петрова, а заместник-директор е Стефан Чернаев. Директор на училището е д-р Анатол Френски.")
 
         elif 'search' in query:
             search_google()
@@ -150,17 +159,17 @@ if __name__ == "__main__":
             kit.playonyt("7 Rings song")
             print("Playing...")
 
-        elif 'news' in query:
+        elif 'news' in query: #iva
             news()
 
         elif 'read' in query:
             text_to_speech()
 
-        elif 'open code' in query:
+        elif 'open editor' in query: #
             codepath = 'C:\\Users\\ivama\\.vscode'
             os.startfile(codepath)
 
-        elif 'joke' in query:
+        elif 'joke' in query: #
             joke = pyjokes.get_joke(language="en", category="all")
             print(joke)
             speak(joke)
@@ -170,11 +179,23 @@ if __name__ == "__main__":
             #print("Screenshot taken")
     
         elif 'offline' in query:
+            speak("Going offline")
+            print("Going offline")
             quit()
+
+        elif 'introduction' in query:
+            introduction()
+
+        elif 'legends' in query: #
+            speak('Not gonna happen')
+            print('Not gonna happen')
+
 
         else:
             speak("Can you repeat that?")
             print("Can you repeat that?")
+
+       
         
         """elif 'remember':
             speak("What should i remember?")

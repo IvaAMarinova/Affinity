@@ -2,6 +2,8 @@ import os
 import wget
 import object_detection
 import matplotlib
+import tensorflow as tf
+print(tf.version.VERSION)
 
 CUSTOM_MODEL_NAME = 'my_ssd_mobnet' 
 PRETRAINED_MODEL_NAME = 'ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8'
@@ -39,5 +41,31 @@ for path in paths.values():
 
 os.environ['PATH'] += os.pathsep + os.path.abspath(os.path.join(paths['PROTOC_PATH'], 'bin'))
 
+#VERIFICATION_SCRIPT = os.path.join('Tensorflow\models', 'research', 'object_detection', 'builders', 'model_builder_tf2_test.py')
+#print(VERIFICATION_SCRIPT)
+'''labels = [{'name':'ThumbsUp', 'id':1}, {'name':'ThumbsDown', 'id':2}, {'name':'HighFive', 'id':3}, {'name':'HalfHeart', 'id':4}, {'name':'FuckYou', 'id':5},]
+
+with open(files['LABELMAP'], 'w') as f:
+    for label in labels:
+        f.write('item { \n')
+        f.write('\tname:\'{}\'\n'.format(label['name']))
+        f.write('\tid:{}\n'.format(label['id']))
+        f.write('}\n')
+
+#print('1  ', files['TF_RECORD_SCRIPT'], '\n')
+#print('2  ',paths['IMAGE_PATH'], '\n')
+#os.path.join(paths['IMAGE_PATH'], 'train')
+#print('3  ',paths['IMAGE_PATH'], '\n')
+#print('4  ',files['LABELMAP'])
 
 
+#print('5  ',paths['ANNOTATION_PATH'])
+#os.path.join(paths['ANNOTATION_PATH'], 'train.record')
+#print('6  ',paths['ANNOTATION_PATH'])
+
+#python Tensorflow\scripts\generate_tfrecord.py -x Tensorflow\workspace\images -l Tensorflow\workspace\annotations\label_map.pbtxt -o Tensorflow\workspace\annotations 
+#!python Tensorflow\scripts\generate_tfrecord.py -x {os.path.join(paths['IMAGE_PATH'], 'test')} -l {files['LABELMAP']} -o {os.path.join(paths['ANNOTATION_PATH'], 'test.record')} 
+
+#!python Tensorflow\scripts\generate_tfrecord.py -x {os.path.join(Tensorflow\workspace\images, 'train')} -l Tensorflow\workspace\annotations -o {os.path.join(Tensorflow\workspace\annotations, 'train.record')} 
+
+#python Tensorflow\scripts\generate_tfrecord.py -x os.path.join(Tensorflow\workspace\images, 'train') -l Tensorflow\workspace\annotations\label_map.pbtxt -o os.path.join(Tensorflow\workspace\annotations, 'train.record') '''

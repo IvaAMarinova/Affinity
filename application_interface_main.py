@@ -169,7 +169,7 @@ class MainWindow(QWidget):
 
 
     def Linkedin_button(self):
-        cam_b = QPushButton("Linkin", self)
+        cam_b = QPushButton("Linkedin", self)
         cam_b.setGeometry(800, 100, 100, 100)
         cam_b.setStyleSheet(setStyleBut_c)
         cam_b.setFont(self.font)
@@ -224,8 +224,8 @@ class MainWindow(QWidget):
 
 
     def bot_to_user(self):
-        bmsg = self.getBotMessage()
-        self.chatlog.setText('Affy:' + bmsg)
+        #bmsg = self.getBotMessage()
+        self.chatlog.setText('Affy: Yet again needing help with our homework, are we Tomy?')
         self.userinput.setFocus()
 
 

@@ -237,7 +237,6 @@ class MainWindow(QWidget):
         cam_b.clicked.connect(lambda: wb.open('http://www.twitter.com'))
 
 
-
     def hide_chat(self):
         if self.hide == True:
             self.frame.hide()
@@ -273,7 +272,6 @@ class MainWindow(QWidget):
         box.addChildWidget(B_enter)
         box.addChildWidget(self.userinput)
         box.addChildWidget(self.chatlog)
-
 
 
     def bot_to_user(self, message):
@@ -481,3 +479,4 @@ if __name__ == "__main__":
 
         else:
             e.bot_to_user(speak("Sorry, I could not hear you."))
+            

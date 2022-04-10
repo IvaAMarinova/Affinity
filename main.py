@@ -102,10 +102,13 @@ class MainWindow(QWidget):
         self.Label()
         self.chatlog = QtWidgets.QTextBrowser()
         self.userinput = QtWidgets.QTextEdit()
+        self.image_label = QtWidgets.QLabel(self)
+        self.image_label.setGeometry(1400, 10, 500, 300)
         self.frame = QFrame(self)
         self.usmg = ''
         self.hide = True
         self.camera_button()
+        self.timer.timeout.connect(self.viewCam)
         self.Youtube_button()
         self.Classroom_button()
         self.Tues_button()
@@ -148,6 +151,25 @@ class MainWindow(QWidget):
         cam_b.setGeometry(100, 750, 200, 70)
         cam_b.setStyleSheet(setStyleBut)
         cam_b.setFont(self.font)
+        cam_b.clicked.connect(self.controlTimer)
+        
+
+    def viewCam(self):
+        ret, image = self.cap.read()
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        height, width, channel = image.shape
+        step = channel * width
+        qImg = QImage(image.data, width, height, step, QImage.Format_RGB888)
+        self.image_label.setPixmap(QPixmap.fromImage(qImg))
+
+    def controlTimer(self):
+        if not self.timer.isActive():
+            self.cap = cv2.VideoCapture(0)
+            self.timer.start(20)
+        else:
+            self.timer.stop()
+            self.image_label.clear()
+            self.cap.release()
 
 
     def Youtube_button(self):
@@ -249,7 +271,7 @@ class MainWindow(QWidget):
         box.addChildWidget(B_enter)
         box.addChildWidget(self.userinput)
         box.addChildWidget(self.chatlog)
-        
+
 
 
     def bot_to_user(self, message):

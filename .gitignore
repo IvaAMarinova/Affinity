@@ -3,3 +3,5 @@
 /Tensorflow
 
 .env
+
+/__pycache__

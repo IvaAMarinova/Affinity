@@ -80,6 +80,7 @@ class MainWindow(QWidget):
         self.chatlog = QtWidgets.QTextBrowser()
         self.userinput = QtWidgets.QTextEdit()
         self.frame = QFrame(self)
+        self.usmg = ''
         self.hide = True
         self.camera_button()
         self.Youtube_button()
@@ -93,12 +94,16 @@ class MainWindow(QWidget):
         self.chat_box_button()
         self.hide_chat()
         self.chat_box()
-        self.getBotMessage()
-        self.user_to_bot()
-        self.bot_to_user()
+        self.get_bot_message()
+        #self.user_to_bot()
+        #self.bot_to_user('')
         self.Gui_style_setup()
         self.show()
         
+        
+    def TEST(self, message):
+        self.bot_to_user(message)
+
     def Gui_style_setup(self):
         self.chatlog.setStyleSheet(setStyletui)
         self.userinput.setStyleSheet(setStyleQte)
@@ -220,22 +225,22 @@ class MainWindow(QWidget):
         box.addChildWidget(B_enter)
         box.addChildWidget(self.userinput)
         box.addChildWidget(self.chatlog)
-        self.bot_to_user()
+        #self.bot_to_user()
 
 
-    def bot_to_user(self):
-        #bmsg = self.getBotMessage()
-        self.chatlog.setText('Affy: Yet again needing help with our homework, are we Tomy?')
+    def bot_to_user(self, message):
+        bmsg = message
+        self.chatlog.append('Affy:' + bmsg)
         self.userinput.setFocus()
 
 
     def user_to_bot(self):
-        usmg = self.userinput.toPlainText()
-        self.chatlog.append('me:' + usmg)
+        self.usmg = self.userinput.toPlainText()
+        self.chatlog.append('me:' + 'self.usmg')
 
 
-    def getBotMessage(self):
-        mes = 'hey muce'
+    def get_bot_message(self):
+        mes = 'eb se'
         return mes
 
 
@@ -263,4 +268,9 @@ class MainWindow(QWidget):
 if __name__ == '__main__':
     application = QApplication(sys.argv)
     e = MainWindow()
+    e.bot_to_user('hi1')
+    e.user_to_bot()
+    e.bot_to_user('hi2')
     sys.exit(application.exec())
+
+

@@ -154,7 +154,7 @@ class MainWindow(QWidget):
         cam_b.setStyleSheet(setStyleBut)
         cam_b.setFont(self.font)
         cam_b.clicked.connect(self.controlTimer)
-        
+
 
     def viewCam(self):
         ret, image = self.cap.read()
@@ -471,6 +471,12 @@ if __name__ == "__main__":
         #just a League of Legends joke
         elif 'legends' in query: 
             e.bot_to_user(speak('Not gonna happen'))
+
+        elif 'camera' in query:
+            cap = cv2.VideoCapture(0)
+            ret, image = cap.read()
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+            cv2.imwrite("siri.png", image)
 
         else:
             e.bot_to_user(speak("Sorry, I could not hear you."))

@@ -1,6 +1,7 @@
 import sys
 import webbrowser
 import cv2
+from cv2 import *
 import time
 import os
 import threading
@@ -45,7 +46,6 @@ setStyleBut = """QPushButton {
     border-radius: 30px;
     border-color: black;
     background-color: Purple;
-    box-shadow: 0px -3px 5px;
 }"""
 setStyleBut_c = """QPushButton {
     border-radius : 50px; 
@@ -138,16 +138,16 @@ class MainWindow(QWidget):
         step = channel * width
         qImg = QImage(image.data, width, height, step, QImage.Format_RGB888)
         self.image_label.setPixmap(QPixmap.fromImage(qImg))
+        cv2.imwrite("siri.png", image)
 
     def controlTimer(self):
+        self.cap = cv2.VideoCapture(0)
         if not self.timer.isActive():
-            self.cap = cv2.VideoCapture(0)
             self.timer.start(20)
         else:
             self.timer.stop()
             self.image_label.clear()
             self.cap.release()
-
 
 
     def Youtube_button(self):

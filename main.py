@@ -7,7 +7,7 @@ import cv2
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QFrame, QHBoxLayout, QTextEdit, QTextBrowser, QLabel, QLayout, QStyle, QTimeEdit, QDateEdit, QDateTimeEdit
 #from PyQt5.QtMultimedia import 
-from PyQt5.QtCore import QDate, QTime, QDateTime
+from PyQt5.QtCore import QDate, QTime, QDateTime, QTimer
 from PyQt5.QtGui import QIcon, QFont, QPalette, QMovie, QPixmap, QImage, QBrush
 
 import pyttsx3  
@@ -108,6 +108,7 @@ class MainWindow(QWidget):
         self.usmg = ''
         self.hide = True
         self.camera_button()
+        self.timer = QTimer()
         self.timer.timeout.connect(self.viewCam)
         self.Youtube_button()
         self.Classroom_button()
@@ -125,6 +126,7 @@ class MainWindow(QWidget):
         #self.bot_to_user('')
         self.Gui_style_setup()
         self.show()
+        
     
         
         

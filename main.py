@@ -472,11 +472,12 @@ if __name__ == "__main__":
         elif 'legends' in query: 
             e.bot_to_user(speak('Not gonna happen'))
 
-        elif 'camera' in query:
+        elif 'selfie' in query:
             cap = cv2.VideoCapture(0)
             ret, image = cap.read()
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-            cv2.imwrite("siri.png", image)
+            path = os.getenv('PHOTO_PATH')
+            cv2.imwrite(os.path.join(path, 'selfie.png'), image)
 
         else:
             e.bot_to_user(speak("Sorry, I could not hear you."))

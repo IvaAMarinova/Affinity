@@ -226,7 +226,7 @@ class MainWindow(QWidget):
     def chat_box(self):
         box = QHBoxLayout()
         self.frame.setFrameStyle(QFrame.Panel)
-        self.frame.setGeometry(1300, 200, 600, 700)
+        self.frame.setGeometry(1400, 350, 500, 600)
         self.frame.setStyleSheet(setStylefr)
         self.frame.setLineWidth(2)
 
@@ -234,22 +234,22 @@ class MainWindow(QWidget):
 
         self.userinput = QtWidgets.QTextEdit(self.frame)
         self.chatlog = QtWidgets.QTextBrowser(self.frame)
-        self.userinput.move(10, 610)
-        self.userinput.resize(500, 80)
+        self.userinput.move(10, 510)
+        self.userinput.resize(400, 80)
         self.chatlog.move(10, 10)
-        self.chatlog.resize(500, 600)
+        self.chatlog.resize(400, 500)
 
         B_enter =  QPushButton("Enter", self.frame)
         B_enter.setStyleSheet(setStyleBut)
         B_enter.setFont(self.font)
-        B_enter.setGeometry(515, 630, 80, 60)
+        B_enter.setGeometry(410, 520, 80, 60)
         B_enter.clicked.connect(self.user_to_bot)
         B_enter.clicked.connect(self.userinput.clear)
 
         box.addChildWidget(B_enter)
         box.addChildWidget(self.userinput)
         box.addChildWidget(self.chatlog)
-        #self.bot_to_user()
+        
 
 
     def bot_to_user(self, message):

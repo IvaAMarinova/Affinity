@@ -1,10 +1,15 @@
 import sys
 import webbrowser
 import cv2
+import time
+import os
+import threading
+import queue
+import numpy as np
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QFrame, QHBoxLayout, QTextEdit, QTextBrowser, QLabel, QLayout, QStyle, QTimeEdit, QDateEdit, QDateTimeEdit
-#from PyQt5.QtMultimedia import 
-from PyQt5.QtCore import QDate, QTime, QDateTime
+from PyQt5.QtMultimedia import QCameraInfo
+from PyQt5.QtCore import QDate, QTime, QDateTime, QTimer
 from PyQt5.QtGui import QIcon, QFont, QPalette, QMovie, QPixmap, QImage, QBrush
 
 
@@ -80,9 +85,12 @@ class MainWindow(QWidget):
         self.chatlog = QtWidgets.QTextBrowser()
         self.userinput = QtWidgets.QTextEdit()
         self.frame = QFrame(self)
-        self.usmg = ''
         self.hide = True
+        self.image_label = QtWidgets.QLabel(self)
+        self.image_label.setGeometry(1400, 10, 500, 300)
+        self.timer = QTimer()
         self.camera_button()
+        self.timer.timeout.connect(self.viewCam)
         self.Youtube_button()
         self.Classroom_button()
         self.Tues_button()
@@ -94,16 +102,12 @@ class MainWindow(QWidget):
         self.chat_box_button()
         self.hide_chat()
         self.chat_box()
-        self.get_bot_message()
-        #self.user_to_bot()
-        #self.bot_to_user('')
+        self.getBotMessage()
+        self.user_to_bot()
+        self.bot_to_user()
         self.Gui_style_setup()
         self.show()
         
-        
-    def TEST(self, message):
-        self.bot_to_user(message)
-
     def Gui_style_setup(self):
         self.chatlog.setStyleSheet(setStyletui)
         self.userinput.setStyleSheet(setStyleQte)
@@ -124,6 +128,26 @@ class MainWindow(QWidget):
         cam_b.setGeometry(100, 750, 200, 70)
         cam_b.setStyleSheet(setStyleBut)
         cam_b.setFont(self.font)
+        cam_b.clicked.connect(self.controlTimer)
+
+    
+    def viewCam(self):
+        ret, image = self.cap.read()
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        height, width, channel = image.shape
+        step = channel * width
+        qImg = QImage(image.data, width, height, step, QImage.Format_RGB888)
+        self.image_label.setPixmap(QPixmap.fromImage(qImg))
+
+    def controlTimer(self):
+        if not self.timer.isActive():
+            self.cap = cv2.VideoCapture(0)
+            self.timer.start(20)
+        else:
+            self.timer.stop()
+            self.image_label.clear()
+            self.cap.release()
+
 
 
     def Youtube_button(self):
@@ -174,7 +198,7 @@ class MainWindow(QWidget):
 
 
     def Linkedin_button(self):
-        cam_b = QPushButton("Linkedin", self)
+        cam_b = QPushButton("Linkin", self)
         cam_b.setGeometry(800, 100, 100, 100)
         cam_b.setStyleSheet(setStyleBut_c)
         cam_b.setFont(self.font)
@@ -202,7 +226,7 @@ class MainWindow(QWidget):
     def chat_box(self):
         box = QHBoxLayout()
         self.frame.setFrameStyle(QFrame.Panel)
-        self.frame.setGeometry(1300, 200, 600, 700)
+        self.frame.setGeometry(1400, 350, 500, 600)
         self.frame.setStyleSheet(setStylefr)
         self.frame.setLineWidth(2)
 
@@ -210,37 +234,37 @@ class MainWindow(QWidget):
 
         self.userinput = QtWidgets.QTextEdit(self.frame)
         self.chatlog = QtWidgets.QTextBrowser(self.frame)
-        self.userinput.move(10, 610)
-        self.userinput.resize(500, 80)
+        self.userinput.move(10, 510)
+        self.userinput.resize(400, 80)
         self.chatlog.move(10, 10)
-        self.chatlog.resize(500, 600)
+        self.chatlog.resize(400, 500)
 
         B_enter =  QPushButton("Enter", self.frame)
         B_enter.setStyleSheet(setStyleBut)
         B_enter.setFont(self.font)
-        B_enter.setGeometry(515, 630, 80, 60)
+        B_enter.setGeometry(410, 520, 80, 60)
         B_enter.clicked.connect(self.user_to_bot)
         B_enter.clicked.connect(self.userinput.clear)
 
         box.addChildWidget(B_enter)
         box.addChildWidget(self.userinput)
         box.addChildWidget(self.chatlog)
-        #self.bot_to_user()
+        self.bot_to_user()
 
 
-    def bot_to_user(self, message):
-        bmsg = message
-        self.chatlog.append('Affy:' + bmsg)
+    def bot_to_user(self):
+        bmsg = self.getBotMessage()
+        self.chatlog.setText('Affy:' + bmsg)
         self.userinput.setFocus()
 
 
     def user_to_bot(self):
-        self.usmg = self.userinput.toPlainText()
-        self.chatlog.append('me:' + 'self.usmg')
+        usmg = self.userinput.toPlainText()
+        self.chatlog.append('me:' + usmg)
 
 
-    def get_bot_message(self):
-        mes = 'eb se'
+    def getBotMessage(self):
+        mes = 'hey muce'
         return mes
 
 
@@ -268,9 +292,4 @@ class MainWindow(QWidget):
 if __name__ == '__main__':
     application = QApplication(sys.argv)
     e = MainWindow()
-    e.bot_to_user('hi1')
-    e.user_to_bot()
-    e.bot_to_user('hi2')
     sys.exit(application.exec())
-
-
